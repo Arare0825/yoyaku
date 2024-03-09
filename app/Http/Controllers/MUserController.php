@@ -56,7 +56,7 @@ class MUserController extends Controller
             // return redirect()->route('/');
 
             $request->session()->regenerate();
-            return redirect()->route('login.show');
+            return redirect()->route('group');
         };
 
         // if([]){

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MUserController;
+use App\Http\Controllers\GroupController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,3 +28,11 @@ Route::get('/login', [MuserController::class, 'index'])->name('login');
 Route::post('/login/store', [MUserController::class, 'store'])->name('login.store');
 // Route::post('/login/store', [MUserController::class, 'store'])->name('login.store');
 Route::get('/login/show', [MUserController::class, 'show'])->name('login.show');
+
+Route::get('/test',function(){
+    return view('test');
+});
+
+Route::get('/group',[GroupController::class,'index'])->name('group');
+Route::get('/group/create',[GroupController::class,'create'])->name('group.create');
+Route::post('/group/store',[GroupController::class,'store'])->name('group.store');
