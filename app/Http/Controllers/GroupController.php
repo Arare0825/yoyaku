@@ -17,7 +17,7 @@ class GroupController extends Controller
     {
 
         $groups = DB::table('groups')
-                        ->select('group_ja','group_en','sort','visible')
+                        ->select('id','group_ja','group_en','sort','visible')
                         ->orderBy('sort','desc')
                         ->get();
 // dd($groups);
@@ -44,12 +44,19 @@ class GroupController extends Controller
     public function store(Request $request)
     {
         // dd($request);
+        $validated = $request->validate([
+            'group_ja' => 'required',
+            'group_en' => 'required',
+            'sort' => 'required',
+        ]);
+
 
         $group_ja = $request->group_ja;
         $group_en = $request->group_en;
         $sort= $request->sort;
         $visible= $request->visible;
         // dd($visible);
+
 
         DB::table('groups')->insert([
             'group_ja' => $group_ja,
@@ -69,9 +76,22 @@ class GroupController extends Controller
      * @param  \App\Models\Group  $group
      * @return \Illuminate\Http\Response
      */
-    public function show(Group $group)
+    public function show($id)
     {
-        //
+        // dd($id);
+
+        // $groups = DB::table('groups')
+        //                 ->select('id','group_ja','group_en','sort','visible')
+        //                 ->orderBy('sort','desc')
+        //                 ->get();
+
+        $group = DB::table('groups')->where('id',$id)->first();
+
+        // dd($group->group_ja);
+
+        return view('group.edit',compact('group'));
+
+
     }
 
     /**
@@ -80,9 +100,12 @@ class GroupController extends Controller
      * @param  \App\Models\Group  $group
      * @return \Illuminate\Http\Response
      */
-    public function edit(Group $group)
+    public function edit($id)
     {
-        //
+        $group = DB::table('groups')->where('id',$id)->first();
+
+        return view('group.edit',compact('group'));
+
     }
 
     /**
@@ -92,9 +115,25 @@ class GroupController extends Controller
      * @param  \App\Models\Group  $group
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Group $group)
+    public function update(Request $request,$id)
     {
-        //
+        // dd($id,$request);
+        $group_ja = $request->group_ja;
+        $group_en = $request->group_en;
+        $sort = $request->sort;
+        $visible = $request->visible;
+
+        $group = DB::table('groups')
+        ->where('id',$id)
+        ->update([
+            'group_ja' => $group_ja,
+            'group_en' => $group_en,
+            'sort' => $sort,
+            'visible' => $visible,
+        ]);
+
+        return redirect()->route('group');
+
     }
 
     /**
@@ -103,8 +142,11 @@ class GroupController extends Controller
      * @param  \App\Models\Group  $group
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Group $group)
+    public function destroy($id)
     {
-        //
+        // dd($id);
+        $deleted = DB::table('groups')->where('id',$id)->delete();
+
+        return redirect()->back();
     }
 }

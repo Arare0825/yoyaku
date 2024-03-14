@@ -6,6 +6,7 @@
     <title>Document</title>
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     
     <style>
         @import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
@@ -37,7 +38,7 @@ top:0;
 bottom:0;
 height:100%;
 left:0;
-width:60px;
+/* width:60px; */
 overflow:hidden;
 -webkit-transition:width .05s linear;
 transition:width .05s linear;
@@ -88,15 +89,15 @@ width:190px;
   font-family: 'Titillium Web', sans-serif;
 }
 
-.main-menu>ul.logout {
+/* .main-menu>ul.logout {
 position:absolute;
 left:0;
 bottom:0;
-}
+} */
 
-.no-touch .scrollable.hover {
+/* .no-touch .scrollable.hover {
 overflow-y:hidden;
-}
+} */
 
 .no-touch .scrollable.hover:hover {
 overflow-y:auto;
@@ -143,91 +144,67 @@ height: 100%;
     <div class="area"></div><nav class="main-menu">
             <ul>
                 <li>
-                    <a href="https://jbfarrow.com">
-                        <i class="fa fa-home fa-2x"></i>
+                    <a href="">
                         <span class="nav-text">
-                           Community Dashboard
+                           予約通知
                         </span>
                     </a>
                   
                 </li>
                 <li class="has-subnav">
                     <a href="#">
-                        <i class="fa fa-globe fa-2x"></i>
                         <span class="nav-text">
-                            Global Surveyors
+                            予約一覧
                         </span>
                     </a>
                     
                 </li>
                 <li class="has-subnav">
                     <a href="#">
-                       <i class="fa fa-comments fa-2x"></i>
                         <span class="nav-text">
-                            Group Hub Forums
+                            空き情報
                         </span>
                     </a>
                     
                 </li>
                 <li class="has-subnav">
                     <a href="#">
-                       <i class="fa fa-camera-retro fa-2x"></i>
                         <span class="nav-text">
-                            Survey Photos
+                            予約TOP編集
                         </span>
                     </a>
                    
                 </li>
                 <li>
-                    <a href="#">
-                        <i class="fa fa-film fa-2x"></i>
+                    <a href="{{ route('group') }}">
                         <span class="nav-text">
-                            Surveying Tutorials
+                            グループ管理
                         </span>
                     </a>
                 </li>
                 <li>
                     <a href="#">
-                        <i class="fa fa-book fa-2x"></i>
                         <span class="nav-text">
-                           Surveying Jobs
+                           予約枠管理
+                        </span>
+                    </a>
+                </li>
+                <li>
+                   <a href="{{ route('facility') }}">
+                        <span class="nav-text">
+                            施設管理
                         </span>
                     </a>
                 </li>
                 <li>
                    <a href="#">
-                       <i class="fa fa-cogs fa-2x"></i>
-                        <span class="nav-text">
-                            Tools & Resources
-                        </span>
-                    </a>
-                </li>
-                <li>
-                   <a href="#">
-                        <i class="fa fa-map-marker fa-2x"></i>
-                        <span class="nav-text">
-                            Member Map
-                        </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                       <i class="fa fa-info fa-2x"></i>
-                        <span class="nav-text">
-                            Documentation
-                        </span>
+                            ユーザー管理
                     </a>
                 </li>
             </ul>
 
             <ul class="logout">
                 <li>
-                   <a href="#">
-                         <i class="fa fa-power-off fa-2x"></i>
-                        <span class="nav-text">
-                            Logout
-                        </span>
-                    </a>
                 </li>  
             </ul>
         </nav>

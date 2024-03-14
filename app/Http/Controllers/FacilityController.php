@@ -14,7 +14,7 @@ class FacilityController extends Controller
      */
     public function index()
     {
-        //
+        return view('facility.index');
     }
 
     /**
