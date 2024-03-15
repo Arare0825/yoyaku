@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Facility;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class FacilityController extends Controller
 {
@@ -14,6 +16,13 @@ class FacilityController extends Controller
      */
     public function index()
     {
+
+        $hid = Auth::user()->hid;
+        // dd($hid);
+
+        $groups = DB::table('groups')->select('group_ja')->where('hid',$hid)->get();
+
+
         return view('facility.index');
     }
 

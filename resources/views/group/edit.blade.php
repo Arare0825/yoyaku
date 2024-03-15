@@ -9,9 +9,10 @@
 		<!-- <div class="update-modal-close">×</div> -->
 		<!-- モーダル内のコンテンツ -->
 		<div class="update-modal-content">
-		<form action="{{ route('group.update',['id'=>$group->id]) }}" method="post">
+		<form action="{{ route('group.update') }}" method="post">
 		@csrf
   <div class="mb-3">
+	<input type="hidden" name="id" value="{{ $group->id }}">
     <label for="exampleInputEmail1" class="form-label">グループ名(JP)</label>
     <input  name="group_ja" type="text" class="form-control" id="exampleInputEmail1" value="{{ $group->group_ja }}">
   </div>
@@ -21,7 +22,7 @@
   </div>
   <div class="form-outline mb-3">
   <label for="exampleInputPassword1" class="form-label">並び順</label>
-    <input name="sort" type="number" id="typeNumber" class="form-control"  value="{{ $group->visible }}"/>
+    <input name="sort" type="number" id="typeNumber" class="form-control"  value="{{ $group->sort }}"/>
 </div>
 <div class="form-outline mb-3">
 <div class="form-check">
@@ -37,7 +38,7 @@
 
   <button type="submit" class="btn btn-primary">変更を保存</button>
 
-
+</form>
   <style>
 .modal-open{
 	position: fixed;

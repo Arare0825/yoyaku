@@ -102,7 +102,6 @@
   </thead>
   <tbody>
 	@foreach($groups as $group)
-	<!-- <input type="hidden" name="id" value="{{ $group->id }}"> -->
     <tr>
       <th scope="row">
 		<a class="id" href="{{ route('group.edit',['id'=>$group->id]) }}">

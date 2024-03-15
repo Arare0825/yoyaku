@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Group;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class GroupController extends Controller
 {
@@ -50,7 +51,8 @@ class GroupController extends Controller
             'sort' => 'required',
         ]);
 
-
+        
+        $hid = Auth::user()->hid;
         $group_ja = $request->group_ja;
         $group_en = $request->group_en;
         $sort= $request->sort;
@@ -59,6 +61,7 @@ class GroupController extends Controller
 
 
         DB::table('groups')->insert([
+            'hid'=> $hid,
             'group_ja' => $group_ja,
             'group_en' => $group_en,
             'sort' => $sort,
@@ -104,6 +107,7 @@ class GroupController extends Controller
     {
         $group = DB::table('groups')->where('id',$id)->first();
 
+        // dd($group->id);
         return view('group.edit',compact('group'));
 
     }
@@ -115,9 +119,10 @@ class GroupController extends Controller
      * @param  \App\Models\Group  $group
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
+    public function update(Request $request)
     {
         // dd($id,$request);
+        $id = $request->id;
         $group_ja = $request->group_ja;
         $group_en = $request->group_en;
         $sort = $request->sort;

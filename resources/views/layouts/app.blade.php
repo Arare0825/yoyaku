@@ -183,7 +183,7 @@ height: 100%;
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="{{ route('time') }}">
                         <span class="nav-text">
                            予約枠管理
                         </span>

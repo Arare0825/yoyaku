@@ -3,7 +3,7 @@
 <main style="margin-left:270px;">
 
 <div style="padding-top:50px;">
-<div class="modal-open">施設追加</div>
+<div class="modal-open">予約枠追加</div>
 </div>
 <div class="modal-container">
 	<div class="modal-body">
@@ -11,63 +11,51 @@
 		<div class="modal-close">×</div>
 		<!-- モーダル内のコンテンツ -->
 		<div class="modal-content">
-		<form action="" method="">
+		<form action="{{ route('time.store') }}" method="post">
 			@csrf
   <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">グループ</label>
-    <input  name="group_ja" type="text" class="form-control" id="exampleInputEmail1" required>
+    <label for="exampleInputEmail1" class="form-label">枠パターン名</label>
+    <input  name="framename" type="text" class="form-control" id="exampleInputEmail1" required>
   </div>
   <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">施設名(JP)</label>
-    <input  name="group_ja" type="text" class="form-control" id="exampleInputEmail1" required>
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">施設名(EN)</label>
-    <input  name="group_ja" type="text" class="form-control" id="exampleInputEmail1" required>
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">画像を選択</label>
-    <input  name="group_ja" type="file"  required>
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">施設説明</label>
-    <textarea  name="group_ja" type="text" class="form-control" id="exampleInputEmail1" required></textarea>
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">営業時間</label>
-    <input  name="group_ja" type="time" class="form-control" id="exampleInputEmail1" required>
+    <label for="exampleInputEmail1" class="form-label">予約可能時間１</label>
+    <input  name="from1" type="time" class="form-control" id="exampleInputEmail1" required>
 	~
-	<input  name="group_ja" type="time" class="form-control" id="exampleInputEmail1" required>
+	<input  name="to1" type="time" class="form-control" id="exampleInputEmail1" required>
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">予約可能時間２</label>
+    <input  name="from2" type="time" class="form-control" id="exampleInputEmail1" required>
+	~
+	<input  name="to2" type="time" class="form-control" id="exampleInputEmail1" required>
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">予約可能時間３</label>
+    <input  name="from3" type="time" class="form-control" id="exampleInputEmail1" required>
+	~
+	<input  name="to3" type="time" class="form-control" id="exampleInputEmail1" required>
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">一日あたりの時間単位</label>
+    <input  name="timeunit" type="number" class="form-control" id="exampleInputEmail1" required>
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">予約締切時間</label>
+    <input  name="deadtime" type="number" class="form-control" id="exampleInputEmail1" required>
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">予約キャンセル可能時間</label>
+    <input  name="cancellimit" type="number" class="form-control" id="exampleInputEmail1" required>
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">予約上限数</label>
+    <input  name="framelimit" type="number" class="form-control" id="exampleInputEmail1" required>
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">一席当たりの最大人数</label>
+    <input  name="maxlimit" type="number" class="form-control" id="exampleInputEmail1" required>
+  </div>
 
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">場所(JP)</label>
-    <input  name="group_ja" type="text" class="form-control" id="exampleInputEmail1" required>
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">場所(EN)</label>
-    <input  name="group_ja" type="text" class="form-control" id="exampleInputEmail1" required>
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">予約枠</label>
-    <input  name="group_ja" type="text" class="form-control" id="exampleInputEmail1" required>
-  </div>
-
-  <div class="form-outline mb-3">
-  <label for="exampleInputPassword1" class="form-label">並び順</label>
-    <input name="sort" type="number" id="typeNumber" class="form-control" value="0" required/>
-</div>
-<div class="form-outline mb-3">
-<div class="form-check">
-  <input name="visible" value="1" type="radio" id="flexRadioDefault1" checked>
-  <label class="form-check-label" for="flexRadioDefault1">
-    表示
-  </label>
-  <input name="visible" value="0"  type="radio" id="flexRadioDefault2" >
-  <label class="form-check-label" for="flexRadioDefault2">
-    非表示
-  </label>
-</div></div>
 
   <button type="submit" class="btn btn-primary">保存</button>
 </form>		
@@ -79,26 +67,45 @@
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">グループ名</th>
-      <th scope="col">施設名</th>
-      <th scope="col">最終更新日</th>
-      <th scope="col">ソート優先度</th>
-      <th scope="col">予約枠設定</th>
+      <th scope="col">枠パターン名</th>
+      <th scope="col">予約可能時間</th>
+      <th scope="col">1枠の時間単位</th>
+      <th scope="col">予約〆切時間</th>
+      <th scope="col">キャンセル可能時間</th>
+	  <th scope="col">予約上限数</th>
+      <th scope="col">1席の最大人数</th>
 	  <th scope="col">削除</th>
     </tr>
   </thead>
   <tbody>
+    @foreach($times as $time)
     <tr>
       <th scope="row">
-		<a class="id" href="">あ</a>
+		<a class="id" href="{{ route('time.edit',['id'=> $time->id]) }}">{{ $time->frame_name }}</a>
 	</th>
-    <td>レストラン１</td>
-    <td>2024-03-14 11:00</td>
-      <td>20</td>
-      <td>パターン３</td>
+    <td>
+    {{ $time->frame_activefrom_1 }} ~ {{ $time->frame_activeto_1 }}<br>
+
+    @if($time->frame_activefrom_3)
+    {{ $time->frame_activefrom_2 }} ~ {{ $time->frame_activeto_2 }}<br>
+    @endif
+
+    @if($time->frame_activefrom_3)
+    {{ $time->frame_activefrom_3 }} ~ {{ $time->frame_activeto_3 }}<br>
+    @endif
+
+    </td>
+    <td>
+    {{ $time->frame_timeunit }}
+    </td>
+      <td>{{ $time->frame_deadtime }}</td>
+      <td>{{ $time->frame_cancellimit }}</td>
+      <td>{{ $time->frame_limit }}</td>
+      <td>{{ $time->frame_max_per_set }}</td>
       <td><button type="submit" class="btn btn-outline-warning">削除</button></td>
+
     </tr>
-    
+    @endforeach
   </tbody>
 </table>
 </div>
