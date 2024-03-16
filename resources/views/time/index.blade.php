@@ -25,18 +25,18 @@
   </div>
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">予約可能時間２</label>
-    <input  name="from2" type="time" class="form-control" id="exampleInputEmail1" required>
+    <input  name="from2" type="time" class="form-control" id="exampleInputEmail1" >
 	~
-	<input  name="to2" type="time" class="form-control" id="exampleInputEmail1" required>
+	<input  name="to2" type="time" class="form-control" id="exampleInputEmail1" >
   </div>
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">予約可能時間３</label>
-    <input  name="from3" type="time" class="form-control" id="exampleInputEmail1" required>
+    <input  name="from3" type="time" class="form-control" id="exampleInputEmail1" >
 	~
-	<input  name="to3" type="time" class="form-control" id="exampleInputEmail1" required>
+	<input  name="to3" type="time" class="form-control" id="exampleInputEmail1" >
   </div>
   <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">一日あたりの時間単位</label>
+    <label for="exampleInputEmail1" class="form-label">一枠あたりの時間単位</label>
     <input  name="timeunit" type="number" class="form-control" id="exampleInputEmail1" required>
   </div>
   <div class="mb-3">

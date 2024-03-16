@@ -19,10 +19,10 @@ class CreateTimesTable extends Migration
             $table->string('frame_name');
             $table->string('frame_activefrom_1');
             $table->string('frame_activeto_1');
-            $table->string('frame_activefrom_2');
-            $table->string('frame_activeto_2');
-            $table->string('frame_activefrom_3');
-            $table->string('frame_activeto_3');
+            $table->string('frame_activefrom_2')->nullable();
+            $table->string('frame_activeto_2')->nullable();
+            $table->string('frame_activefrom_3')->nullable();
+            $table->string('frame_activeto_3')->nullable();
             $table->integer('frame_limit');
             $table->integer('frame_max_per_set');
             $table->integer('frame_timeunit');

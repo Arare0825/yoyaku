@@ -10,49 +10,66 @@
 		<div class="modal-close">×</div>
 		<!-- モーダル内のコンテンツ -->
 		<div class="amodal-content">
-		<form action="{{ route('time.store') }}" method="post">
+		<form action="{{ route('time.update') }}" method="post">
 			@csrf
   <div class="mb-3">
+	<input type="hidden" name="id" value="{{ $time->id }}">
     <label for="exampleInputEmail1" class="form-label">枠パターン名</label>
     <input  name="framename" type="text" class="form-control" id="exampleInputEmail1" value="{{ $time->frame_name }}" required>
   </div>
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">予約可能時間１</label>
-    <input  name="from1" type="time" class="form-control" id="exampleInputEmail1" value="frame_activefrom_1" required>
+    <input  name="from1" type="time" class="form-control" id="exampleInputEmail1" value="{{ $time->frame_activefrom_1 }}" required>
 	~
-	<input  name="to1" type="time" class="form-control" id="exampleInputEmail1" value="frame_activeto_1" required>
+	<input  name="to1" type="time" class="form-control" id="exampleInputEmail1" value="{{ $time->frame_activeto_1 }}" required>
   </div>
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">予約可能時間２</label>
-    <input  name="from2" type="time" class="form-control" id="exampleInputEmail1" required>
+	@if($time->frame_activefrom_2)
+    <input  name="from2" type="time" class="form-control" id="exampleInputEmail1" value="{{ $time->frame_activefrom_2 }}">
+	@else
+	<input  name="from2" type="time" class="form-control" id="exampleInputEmail1">
+	@endif
 	~
-	<input  name="to2" type="time" class="form-control" id="exampleInputEmail1" required>
+	@if($time->frame_activeto_2)
+	<input  name="to2" type="time" class="form-control" id="exampleInputEmail1" value="{{ $time->frame_activeto_2 }}">
+	@else	
+	<input  name="to2" type="time" class="form-control" id="exampleInputEmail1">
+	@endif
   </div>
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">予約可能時間３</label>
-    <input  name="from3" type="time" class="form-control" id="exampleInputEmail1" required>
+	@if($time->frame_activefrom_3)
+    <input  name="from3" type="time" class="form-control" id="exampleInputEmail1" value="{{ $time->frame_activefrom_3 }}">
+	@else
+	<input  name="from3" type="time" class="form-control" id="exampleInputEmail1">
+	@endif
 	~
-	<input  name="to3" type="time" class="form-control" id="exampleInputEmail1" required>
+	@if($time->frame_activeto_3)
+	<input  name="to3" type="time" class="form-control" id="exampleInputEmail1" value="{{ $time->frame_activeto_3 }}">
+	@else
+	<input  name="to3" type="time" class="form-control" id="exampleInputEmail1">
+	@endif
   </div>
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">一日あたりの時間単位</label>
-    <input  name="timeunit" type="number" class="form-control" id="exampleInputEmail1" required>
+    <input  name="timeunit" type="number" class="form-control" id="exampleInputEmail1" value="{{ $time->frame_timeunit }}" required>
   </div>
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">予約締切時間</label>
-    <input  name="deadtime" type="number" class="form-control" id="exampleInputEmail1" required>
+    <input  name="deadtime" type="number" class="form-control" id="exampleInputEmail1" value="{{ $time->frame_deadtime }}" required>
   </div>
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">予約キャンセル可能時間</label>
-    <input  name="cancellimit" type="number" class="form-control" id="exampleInputEmail1" required>
+    <input  name="cancellimit" type="number" class="form-control" id="exampleInputEmail1" value="{{ $time->frame_cancellimit }}" required>
   </div>
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">予約上限数</label>
-    <input  name="framelimit" type="number" class="form-control" id="exampleInputEmail1" required>
+    <input  name="framelimit" type="number" class="form-control" id="exampleInputEmail1" value="{{ $time->frame_limit}}" required>
   </div>
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">一席当たりの最大人数</label>
-    <input  name="maxlimit" type="number" class="form-control" id="exampleInputEmail1" required>
+    <input  name="maxlimit" type="number" class="form-control" id="exampleInputEmail1" value="{{ $time->frame_max_per_set }}" required>
   </div>
 
 

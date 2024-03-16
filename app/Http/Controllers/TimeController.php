@@ -6,6 +6,7 @@ use App\Models\Time;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class TimeController extends Controller
 {
@@ -44,8 +45,8 @@ class TimeController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
 
+        //ログインユーザーの取得
         $hid = Auth::user()->hid;
         // dd($hid);
         DB::table('times')->insert([
@@ -103,9 +104,26 @@ class TimeController extends Controller
      * @param  \App\Models\Time  $time
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Time $time)
+    public function update(Request $request)
     {
-        //
+        $id = $request->id;
+
+        DB::table('times')->where('id',$id)->update([
+            'frame_name' => $request->framename,
+            'frame_activefrom_1' => $request->from1,
+            'frame_activeto_1' => $request->to1,
+            'frame_activefrom_2' => $request->from2,
+            'frame_activeto_2' => $request->to2,
+            'frame_activefrom_3' => $request->from3,
+            'frame_activeto_3' => $request->to3,
+            'frame_limit' => $request->framelimit,
+            'frame_max_per_set' => $request->maxlimit,
+            'frame_deadtime' => $request->deadtime,
+            'frame_cancellimit' => $request->cancellimit,
+            'frame_timeunit' => $request->timeunit
+        ]);
+
+        return redirect()->route('time');
     }
 
     /**
