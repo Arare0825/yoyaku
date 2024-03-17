@@ -132,8 +132,11 @@ class TimeController extends Controller
      * @param  \App\Models\Time  $time
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Time $time)
+    public function destroy($id)
     {
-        //
+        
+        $id = DB::table('times')->where('id',$id)->delete();
+
+        return redirect()->back();
     }
 }

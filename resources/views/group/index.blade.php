@@ -118,7 +118,7 @@
 	  @endif
 	  <form action="{{ route('group.destroy',['id'=> $group->id]) }}" method="post">
 		@csrf
-      <td><button type="submit" class="btn btn-outline-warning">削除</button></td>
+      <td><button onclick="deleteMessage(event);return false;" type="submit" class="btn btn-outline-warning">削除</button></td>
 	  </form>
     </tr>
 	@endforeach
@@ -209,6 +209,13 @@
 </style>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script>
+function deleteMessage(){
+	if(!window.confirm('本当に削除しますか？')){
+		return false;
+	}
+	document.deleteform.submit();
+}
+
 $(function(){
 	// 変数に要素を入れる
 	var open = $('.modal-open'),

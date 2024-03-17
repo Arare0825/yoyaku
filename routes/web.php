@@ -57,4 +57,5 @@ function(){
     Route::post('/time/store',[TimeController::class,'store'])->name('time.store');
     Route::get('/time/{id}/edit',[TimeController::class,'edit'])->name('time.edit');
     Route::post('/time/update',[TimeController::class,'update'])->name('time.update');
+    Route::post('/time/{id}',[TimeController::class,'destroy'])->name('time.destory');
 });

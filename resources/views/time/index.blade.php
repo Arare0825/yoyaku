@@ -102,8 +102,10 @@
       <td>{{ $time->frame_cancellimit }}</td>
       <td>{{ $time->frame_limit }}</td>
       <td>{{ $time->frame_max_per_set }}</td>
-      <td><button type="submit" class="btn btn-outline-warning">削除</button></td>
-
+	  <form action="{{ route('time.destory',['id' => $time->id]) }}" method="post">
+		@csrf
+      <td><button type="submit" onclick="deleteMessage(event);return false;" class="btn btn-outline-warning">削除</button></td>
+	  </form>
     </tr>
     @endforeach
   </tbody>
@@ -191,6 +193,14 @@
 </style>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script>
+function deleteMessage(){
+	if(!window.confirm('本当に削除しますか？')){
+		return false;
+	}
+	document.deleteform.submit();
+}
+
+
 $(function(){
 	// 変数に要素を入れる
 	var open = $('.modal-open'),
