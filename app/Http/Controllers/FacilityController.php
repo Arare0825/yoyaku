@@ -20,10 +20,11 @@ class FacilityController extends Controller
         $hid = Auth::user()->hid;
         // dd($hid);
 
-        $groups = DB::table('groups')->select('group_ja')->where('hid',$hid)->get();
+        $groups = DB::table('groups')->select('id','group_ja')->where('hid',$hid)->get();
+        $times = DB::table('times')->select('id','frame_name')->where('hid',$hid)->get();
 
-
-        return view('facility.index');
+        // dd($groups,$times);
+        return view('facility.index',compact('groups','times'));
     }
 
     /**

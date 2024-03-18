@@ -14,9 +14,15 @@
 		<form action="" method="">
 			@csrf
   <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">グループ</label>
-    <input  name="group_ja" type="text" class="form-control" id="exampleInputEmail1" required>
-  </div>
+  <!--  カテゴリープルダウン -->
+  <div class="form-group">
+        <label for="category-id">{{ __('グループ名') }}<span class="badge badge-danger ml-2">{{ __('必須') }}</span></label>
+        <select class="form-control" id="category-id" name="category_id">
+            @foreach ($groups as $group)
+                <option value="{{ $group->id }}">{{ $group->group_ja }}</option>
+            @endforeach
+        </select>
+      </div>  </div>
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">施設名(JP)</label>
     <input  name="group_ja" type="text" class="form-control" id="exampleInputEmail1" required>
@@ -49,8 +55,12 @@
     <input  name="group_ja" type="text" class="form-control" id="exampleInputEmail1" required>
   </div>
   <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">予約枠</label>
-    <input  name="group_ja" type="text" class="form-control" id="exampleInputEmail1" required>
+  <label for="category-id">{{ __('予約枠') }}<span class="badge badge-danger ml-2">{{ __('必須') }}</span></label>
+        <select class="form-control" id="category-id" name="category_id">
+            @foreach ($times as $time)
+                <option value="{{ $time->id }}">{{ $time->frame_name }}</option>
+            @endforeach
+        </select>
   </div>
 
   <div class="form-outline mb-3">
