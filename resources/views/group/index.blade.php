@@ -36,7 +36,8 @@
   <label class="form-check-label" for="flexRadioDefault2">
     非表示
   </label>
-</div></div>
+</div>
+</div>
 
   <button type="submit" class="btn btn-primary">保存</button>
 </form>		

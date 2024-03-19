@@ -16,9 +16,11 @@ class GroupController extends Controller
      */
     public function index()
     {
+        $hid =  $hid = Auth::user()->hid;
 
         $groups = DB::table('groups')
                         ->select('id','group_ja','group_en','sort','visible')
+                        ->where('hid',$hid)
                         ->orderBy('sort','desc')
                         ->get();
 // dd($groups);

@@ -11,48 +11,49 @@
 		<div class="modal-close">×</div>
 		<!-- モーダル内のコンテンツ -->
 		<div class="modal-content">
-		<form action="" method="">
+		<form action="{{ route('facility.store')  }}" method="post" enctype="multipart/form-data">
 			@csrf
   <div class="mb-3">
   <!--  カテゴリープルダウン -->
   <div class="form-group">
         <label for="category-id">{{ __('グループ名') }}<span class="badge badge-danger ml-2">{{ __('必須') }}</span></label>
-        <select class="form-control" id="category-id" name="category_id">
+        <select class="form-control" id="category-id" name="group_id">
             @foreach ($groups as $group)
                 <option value="{{ $group->id }}">{{ $group->group_ja }}</option>
             @endforeach
         </select>
-      </div>  </div>
+      </div> 
+     </div>
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">施設名(JP)</label>
-    <input  name="group_ja" type="text" class="form-control" id="exampleInputEmail1" required>
+    <input  name="facility_name_jp" type="text" class="form-control" id="exampleInputEmail1" required>
   </div>
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">施設名(EN)</label>
-    <input  name="group_ja" type="text" class="form-control" id="exampleInputEmail1" required>
+    <input  name="facility_name_en" type="text" class="form-control" id="exampleInputEmail1" required>
   </div>
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">画像を選択</label>
-    <input  name="group_ja" type="file"  required>
+    <input  name="facility_images" type="file"  required>
   </div>
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">施設説明</label>
-    <textarea  name="group_ja" type="text" class="form-control" id="exampleInputEmail1" required></textarea>
+    <textarea  name="facility_introduction" type="text" class="form-control" id="exampleInputEmail1" required></textarea>
   </div>
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">営業時間</label>
-    <input  name="group_ja" type="time" class="form-control" id="exampleInputEmail1" required>
+    <input  name=" facility_busines_hours1" type="time" class="form-control" id="exampleInputEmail1" required>
 	~
-	<input  name="group_ja" type="time" class="form-control" id="exampleInputEmail1" required>
+	<input  name=" facility_busines_hours2" type="time" class="form-control" id="exampleInputEmail1" required>
 
   </div>
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">場所(JP)</label>
-    <input  name="group_ja" type="text" class="form-control" id="exampleInputEmail1" required>
+    <input  name="facility_place_jp" type="text" class="form-control" id="exampleInputEmail1" required>
   </div>
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">場所(EN)</label>
-    <input  name="group_ja" type="text" class="form-control" id="exampleInputEmail1" required>
+    <input  name="facility_place_en" type="text" class="form-control" id="exampleInputEmail1" required>
   </div>
   <div class="mb-3">
   <label for="category-id">{{ __('予約枠') }}<span class="badge badge-danger ml-2">{{ __('必須') }}</span></label>
@@ -65,15 +66,15 @@
 
   <div class="form-outline mb-3">
   <label for="exampleInputPassword1" class="form-label">並び順</label>
-    <input name="sort" type="number" id="typeNumber" class="form-control" value="0" required/>
+    <input name="facility_sort" type="number" id="typeNumber" class="form-control" value="0" required/>
 </div>
 <div class="form-outline mb-3">
 <div class="form-check">
-  <input name="visible" value="1" type="radio" id="flexRadioDefault1" checked>
+  <input name="facility_visible" value="1" type="radio" id="flexRadioDefault1" checked>
   <label class="form-check-label" for="flexRadioDefault1">
     表示
   </label>
-  <input name="visible" value="0"  type="radio" id="flexRadioDefault2" >
+  <input name="facility_visible" value="0"  type="radio" id="flexRadioDefault2" >
   <label class="form-check-label" for="flexRadioDefault2">
     非表示
   </label>
@@ -99,14 +100,16 @@
   </thead>
   <tbody>
     <tr>
+      @foreach($facilities as $facility)
       <th scope="row">
-		<a class="id" href="">あ</a>
+		<a class="id" href="">{{ $facility->group_id }}</a>
 	</th>
-    <td>レストラン１</td>
+    <td>{{ $facility->facility_name_jp }}</td>
     <td>2024-03-14 11:00</td>
-      <td>20</td>
-      <td>パターン３</td>
+      <td>{{ $facility->facility_sort }}</td>
+      <td>{{ $facility->frame_id }}</td>
       <td><button type="submit" class="btn btn-outline-warning">削除</button></td>
+      @endforeach
     </tr>
     
   </tbody>
