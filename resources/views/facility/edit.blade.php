@@ -2,71 +2,67 @@
 
 <main style="margin-left:270px;">
 
-<div style="padding-top:50px;">
-<div class="modal-open">施設追加</div>
-</div>
-<div class="modal-container">
-	<div class="modal-body">
-		<!-- 閉じるボタン -->
-		<div class="modal-close">×</div>
 		<!-- モーダル内のコンテンツ -->
 		<div class="modal-content">
-		<form action="{{ route('facility.store')  }}" method="post" enctype="multipart/form-data">
+		<form action="{{ route('facility.update')  }}" method="post" enctype="multipart/form-data">
 			@csrf
+			<input type="hidden" name="facility_id" value="{{ $facility->id }}">
   <div class="mb-3">
   <!--  カテゴリープルダウン -->
   <div class="form-group">
         <label for="category-id">{{ __('グループ名') }}<span class="badge badge-danger ml-2">{{ __('必須') }}</span></label>
-        <select class="form-control" id="category-id" name="group_id">
+        <select class="form-control" id="category-id" value="{{ $facility->id }}" name="group_id">
             @foreach ($groups as $group)
-                <option value="{{ $group->id }}">{{ $group->group_ja }}</option>
+                <option value="{{ $group->id }}" @if($group->id == $facilitySelected)  selected @endif>{{ $group->group_ja }}</option>
             @endforeach
         </select>
       </div> 
      </div>
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">施設名(JP)</label>
-    <input  name="facility_name_jp" type="text" class="form-control" id="exampleInputEmail1" required>
+    <input  name="facility_name_jp" type="text" class="form-control" id="exampleInputEmail1" value="{{ $facility->facility_name_jp }}" required>
   </div>
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">施設名(EN)</label>
-    <input  name="facility_name_en" type="text" class="form-control" id="exampleInputEmail1" required>
+    <input  name="facility_name_en" type="text" class="form-control" id="exampleInputEmail1" value="{{ $facility->facility_name_en }}" required>
   </div>
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">画像を選択</label>
     <input  name="facility_images" type="file">
+	<img src="{{ asset($img) }}">
+	設定中の画像
   </div>
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">施設説明</label>
-    <textarea  name="facility_introduction" type="text" class="form-control" id="exampleInputEmail1"></textarea>
+    <textarea  name="facility_introduction" type="text" class="form-control" id="exampleInputEmail1">{{$facility->facility_introduction }}</textarea>
   </div>
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">営業時間</label>
-    <input  name=" facility_open_hours" type="time" class="form-control" id="exampleInputEmail1" required>
+    <input  name=" facility_open_hours" type="time" class="form-control" value="{{$facility->facility_open_hours }}" id="exampleInputEmail1" required>
 	~
-	<input  name=" facility_close_hours" type="time" class="form-control" id="exampleInputEmail1" required>
+	<input  name=" facility_close_hours" type="time" class="form-control" value="{{$facility->facility_close_hours }}" id="exampleInputEmail1" required>
 
   </div>
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">場所(JP)</label>
-    <input  name="facility_place_jp" type="text" class="form-control" id="exampleInputEmail1" required>
+    <input  name="facility_place_jp" type="text" class="form-control" id="exampleInputEmail1" value="{{ $facility->facility_place_jp }}" required>
   </div>
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">場所(EN)</label>
-    <input  name="facility_place_en" type="text" class="form-control" id="exampleInputEmail1" required>
+    <input  name="facility_place_en" type="text" class="form-control" id="exampleInputEmail1" value="{{ $facility->facility_place_en }}" required>
   </div>
   <div class="mb-3">
   <label for="category-id">{{ __('予約枠') }}<span class="badge badge-danger ml-2">{{ __('必須') }}</span></label>
-        <select class="form-control" id="category-id" name="category_id">
+        <select class="form-control" id="category-id" value="{{ $facility->frame_id }}" name="category_id">
             @foreach ($times as $time)
-                <option value="{{ $time->id }}">{{ $time->frame_name }}</option>
+                <option value="{{ $time->id }}" @if($time->frame_name == $timeSelected)  selected @endif>{{ $time->frame_name }}</option>
             @endforeach
         </select>
   </div>
 
   <div class="form-outline mb-3">
   <label for="exampleInputPassword1" class="form-label">並び順</label>
-    <input name="facility_sort" type="number" id="typeNumber" class="form-control" value="0" required/>
+    <input name="facility_sort" type="number" id="typeNumber" class="form-control" value="{{ $facility->facility_sort }}" required/>
 </div>
 <div class="form-outline mb-3">
 <div class="form-check">
@@ -80,44 +76,12 @@
   </label>
 </div></div>
 
-  <button type="submit" class="btn btn-primary">保存</button>
+  <button type="submit" class="btn btn-primary">変更を保存</button>
 </form>		
 </div>
 	</div>
 </div>
 
-<div>
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">グループ名</th>
-      <th scope="col">施設名</th>
-      <th scope="col">最終更新日</th>
-      <th scope="col">ソート優先度</th>
-      <th scope="col">予約枠設定</th>
-	  <th scope="col">削除</th>
-    </tr>
-  </thead>
-  <tbody>
-  @foreach($facilities as $facility)
-    <tr>
-      <th scope="row">
-		<a class="id" href="{{ route('facility.edit',['id'=> $facility->id]) }}">{{ $facility->group_id }}</a>
-	</th>
-    <td>{{ $facility->facility_name_jp }}</td>
-    <td>2024-03-14 11:00</td>
-      <td>{{ $facility->facility_sort }}</td>
-      <td>{{ $facility->frame_id }}</td>
-      <form action="{{ route('facility.destroy',['id'=> $facility->id]) }}" method="post">
-		@csrf
-      <td><button onclick="deleteMessage(event);return false;" type="submit" class="btn btn-outline-warning">削除</button></td>
-	  </form>
-    </tr>
-    @endforeach
-
-  </tbody>
-</table>
-</div>
 <!-- モーダル表示 -->
 <style>
 .modal-open{
@@ -200,12 +164,6 @@
 </style>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script>
-  function deleteMessage(){
-	if(!window.confirm('本当に削除しますか？')){
-		return false;
-	}
-	document.deleteform.submit();
-}
 $(function(){
 	// 変数に要素を入れる
 	var open = $('.modal-open'),

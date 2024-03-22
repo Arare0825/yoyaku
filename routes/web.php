@@ -49,6 +49,9 @@ Route::group(['middleware'=> 'auth'],
 function(){
     Route::get('/facility',[FacilityController::class,'index'])->name('facility');
     Route::post('/facility/store',[FacilityController::class,'store'])->name('facility.store');
+    Route::get('/facility/{id}/edit',[FacilityController::class,'edit'])->name('facility.edit');
+    Route::post('/facility/update',[FacilityController::class,'update'])->name('facility.update');
+    Route::post('/facility/{id}',[FacilityController::class,'destroy'])->name('facility.destroy');
 });
 
 //予約枠作成

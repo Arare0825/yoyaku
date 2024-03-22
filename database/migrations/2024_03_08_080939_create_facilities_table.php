@@ -22,9 +22,10 @@ class CreateFacilitiesTable extends Migration
             $table->string('facility_name_en');
             $table->integer('facility_sort');
             $table->string('facility_visible');
-            $table->string('facility_images');
-            $table->string('facility_introduction');
-            $table->string('facility_busines_hours');
+            $table->string('facility_images')->nullable();
+            $table->string('facility_introduction')->nullable();
+            $table->string('facility_open_hours');
+            $table->string('facility_close_hours');
             $table->string('facility_place_jp');
             $table->string('facility_place_en');
             $table->string('frame_id');
