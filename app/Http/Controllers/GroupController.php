@@ -90,7 +90,9 @@ class GroupController extends Controller
         //                 ->orderBy('sort','desc')
         //                 ->get();
 
-        $group = DB::table('groups')->where('id',$id)->first();
+        $group = DB::table('groups')
+        ->where('id',$id)
+        ->first();
 
         // dd($group->group_ja);
 
@@ -107,7 +109,9 @@ class GroupController extends Controller
      */
     public function edit($id)
     {
-        $group = DB::table('groups')->where('id',$id)->first();
+        $group = DB::table('groups')
+        ->where('id',$id)
+        ->first();
 
         // dd($group->id);
         return view('group.edit',compact('group'));
@@ -152,7 +156,9 @@ class GroupController extends Controller
     public function destroy($id)
     {
         // dd($id);
-        $deleted = DB::table('groups')->where('id',$id)->delete();
+        $deleted = DB::table('groups')
+        ->where('id',$id)
+        ->delete();
 
         return redirect()->back();
     }

@@ -21,9 +21,20 @@ class FacilityController extends Controller
         $hid = Auth::user()->hid;
         // dd($hid);
 
-        $groups = DB::table('groups')->select('id','group_ja')->where('hid',$hid)->get();
-        $times = DB::table('times')->select('id','frame_name')->where('hid',$hid)->get();
-        $facilities = DB::table('facilities')->where('hid',$hid)->orderBy('facility_sort','desc')->get();
+        $groups = DB::table('groups')
+        ->select('id','group_ja')
+        ->where('hid',$hid)
+        ->get();
+
+        $times = DB::table('times')
+        ->select('id','frame_name')
+        ->where('hid',$hid)
+        ->get();
+
+        $facilities = DB::table('facilities')
+        ->where('hid',$hid)
+        ->orderBy('facility_sort','desc')
+        ->get();
 
         // dd($facilities);
         return view('facility.index',compact('groups','times','facilities'));
@@ -60,11 +71,18 @@ class FacilityController extends Controller
 
         //グループ名取得
         $GId = $request->group_id;
-        $Gname = DB::table('groups')->select('group_ja')->where('id',$GId)->first();
+        $Gname = DB::table('groups')
+        ->select('group_ja')
+        ->where('id',$GId)
+        ->first();
 
         //予約枠取得
         $FId = $request->category_id;
-        $Fname = DB::table('times')->select('frame_name')->where('id',$FId)->first();
+        $Fname = DB::table('times')
+        ->select('frame_name')
+        ->where('id',$FId)
+        ->first();
+
         $frameName = $Fname->frame_name;
 
 
@@ -115,13 +133,21 @@ class FacilityController extends Controller
         $hid = Auth::user()->hid;
 
         //編集する施設IDを取得
-        $facility = DB::table('facilities')->where('id',$id)->first();
+        $facility = DB::table('facilities')
+        ->where('id',$id)
+        ->first();
 
         //グループ選択のためのグループIDを取得
-        $groups = DB::table('groups')->select('id','group_ja')->where('hid',$hid)->get();
+        $groups = DB::table('groups')
+        ->select('id','group_ja')
+        ->where('hid',$hid)
+        ->get();
 
         //フレーム選択のためのフレーム名の取得
-        $times = DB::table('times')->select('id','frame_name')->where('hid',$hid)->get();
+        $times = DB::table('times')
+        ->select('id','frame_name')
+        ->where('hid',$hid)
+        ->get();
 
 
         $facilitySelected = $facility->id;
@@ -147,6 +173,7 @@ class FacilityController extends Controller
         //画像ファイル名を重複を避けるためタイムスタンプ＋ファイル名で作成
         $img = null;
 
+        //リクエストで新規のファイルが入ってたらアップデート、なければ同じ画像データを再投入
         if(! $request->facility_images== null){
             $carbon = new Carbon();
             $filedate = $carbon->timestamp;
@@ -161,11 +188,18 @@ class FacilityController extends Controller
 
         //グループ名取得
         $GId = $request->group_id;
-        $Gname = DB::table('groups')->select('group_ja')->where('id',$GId)->first();
+        $Gname = DB::table('groups')
+        ->select('group_ja')
+        ->where('id',$GId)
+        ->first();
 
         //予約枠取得
         $FId = $request->category_id;
-        $Fname = DB::table('times')->select('frame_name')->where('id',$FId)->first();
+        $Fname = DB::table('times')
+        ->select('frame_name')
+        ->where('id',$FId)
+        ->first();
+
         $frameName = $Fname->frame_name;
 
 
@@ -201,7 +235,9 @@ class FacilityController extends Controller
      */
     public function destroy($id)
     {
-        $deleted = DB::table('facilities')->where('id',$id)->delete();
+        $deleted = DB::table('facilities')
+        ->where('id',$id)
+        ->delete();
 
         return redirect()->back();
     }

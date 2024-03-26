@@ -20,7 +20,9 @@ class TimeController extends Controller
         $hid = Auth::user()->hid;
         // dd($hid);
 
-        $times = DB::table('times')->where('hid',$hid)->get();
+        $times = DB::table('times')
+        ->where('hid',$hid)
+        ->get();
         // dd($times);
 
 
@@ -90,7 +92,9 @@ class TimeController extends Controller
     public function edit($id)
     {
 
-        $time = DB::table('times')->where('id',$id)->first();
+        $time = DB::table('times')
+        ->where('id',$id)
+        ->first();
 
         // dd($time->hid);
 
@@ -135,7 +139,9 @@ class TimeController extends Controller
     public function destroy($id)
     {
         
-        $id = DB::table('times')->where('id',$id)->delete();
+        $id = DB::table('times')
+        ->where('id',$id)
+        ->delete();
 
         return redirect()->back();
     }

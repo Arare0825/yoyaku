@@ -5,6 +5,7 @@ use App\Http\Controllers\MUserController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\TimeController;
+use App\Http\Controllers\TvController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,3 +64,8 @@ function(){
     Route::post('/time/update',[TimeController::class,'update'])->name('time.update');
     Route::post('/time/{id}',[TimeController::class,'destroy'])->name('time.destory');
 });
+
+Route::get('/tv/{hid}',[TvController::class,'index'])->name('tv');
+Route::get('/tv/{hid}/{Gid}',[TvController::class,'facility'])->name('tv.group');
+// Route::get('/tv/{hid}/{Gid}/{Fid}',[TvController::class,'facility'])->name('tv.facility');
+Route::get('/tv/{hid}/{Gid}/show/{Fid}',[TvController::class,'show'])->name('tv.facility.show');
