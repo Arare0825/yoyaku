@@ -65,7 +65,7 @@ function(){
     Route::post('/time/{id}',[TimeController::class,'destroy'])->name('time.destory');
 });
 
+//TV側ルート作成
 Route::get('/tv/{hid}',[TvController::class,'index'])->name('tv');
+Route::get('/tv/reservation/{Fid}',[TvController::class,'reservation'])->name('tv.reservation');
 Route::get('/tv/{hid}/{Gid}',[TvController::class,'facility'])->name('tv.group');
-// Route::get('/tv/{hid}/{Gid}/{Fid}',[TvController::class,'facility'])->name('tv.facility');
-Route::get('/tv/{hid}/{Gid}/show/{Fid}',[TvController::class,'show'])->name('tv.facility.show');

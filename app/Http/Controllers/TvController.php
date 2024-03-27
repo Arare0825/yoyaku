@@ -62,7 +62,7 @@ class TvController extends Controller
         
         //項目選択のためのfacilitiesテーブルからhidとグループ名が一致するgroupIDを取得
         $facilities = DB::table('facilities')
-        ->select('id','facility_name_jp','facility_name_en')
+        // ->select('id','facility_name_jp','facility_name_en')
         ->where('hid',$hid)
         ->where('facility_visible',1)
         ->where('group_id',$groupName->group_ja)
@@ -78,16 +78,26 @@ class TvController extends Controller
         ->first();
 
 
-        $img = 'storage/facilityImages/' . $topFacility->facility_images;
+        //初期表示画像のパスを変数に格納
+        $topImg = 'storage/facilityImages/' . $topFacility->facility_images;
+
 
         // dd( $topFacility);
-        return view('tv.facility',compact('facilities','topFacility','img','Gid','hid'));
+        return view('tv.facility',compact('facilities','topFacility','topImg','Gid','hid'));
     }
 
 
-    public function show($Hid,$Gid,$Fid)
+    public function reservation($id)
     {
-        dd($Hid,$Gid,$Fid);
+
+        //施設に紐づいている予約枠を取得
+        $frameName = DB::table('facilities')->select('frame_id')->where('id',$id)->first();
+        $frame = $frameName->frame_id;
+
+        $time = DB::table('times')->where('frame_name',$frame)->first();
+
+        dd($time);
+        // return view('tv.facility');
     }
 
 
