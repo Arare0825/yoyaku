@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Tv;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Carbon\Carbon;
 
 class TvController extends Controller
 {
@@ -96,8 +96,27 @@ class TvController extends Controller
 
         $time = DB::table('times')->where('frame_name',$frame)->first();
 
-        dd($time);
-        // return view('tv.facility');
+        //予約可能時間1のスタート時間と予約終了時間(1~3のNULLではない時間)を取得
+        $startTime = $time->frame_activefrom_1;
+        $endtime = null;
+        $activeTime = $time->frame_timeunit;
+
+        if(! is_null($time->frame_activeto_3)){
+            $endTime = $time->frame_activeto_3;
+        }elseif(! is_null($time->frame_activeto_2)){
+            $endTime = $time->frame_activeto_2;
+        }else{
+            $endTime = $time->frame_activeto_1;
+        }
+
+        $startTime = strtotime($startTime);
+        $endTime = strtotime($endTime);
+        $activeTime = $activeTime * 60;
+        $reservationTime = $startTime + $activeTime;
+
+        // dd($startTime,$endTime,$activeTime,$reservationTime);
+        return view('tv.reservation',compact('startTime','endTime','activeTime','reservationTime'));
+
     }
 
 
